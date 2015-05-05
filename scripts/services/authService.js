@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
+app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {console.log('here')
 	var ref = new Firebase(FURL);
 	var auth = $firebaseAuth(ref);
 
@@ -45,8 +45,8 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
 		changePassword: function(user) {
 			return auth.$changePassword({
 				email: user.email,
-				oldPassword: user.oldpass,
-				newPassword: user.newpass
+				oldPassword: user.oldPass,
+				newPassword: user.newPass
 			});
 		},
 
