@@ -39,12 +39,6 @@ var app = angular
         controller: "AuthController",
         cache: false
       })
-      .state("browse", {
-        url: "/browse/:taskId",
-        templateUrl: "views/browse.html",
-        controller: "BrowseController",
-        cache: false
-      })
       .state("dashboard", {
         url: "/dashboard",
         templateUrl: "views/dashboard.html",
