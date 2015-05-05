@@ -1,0 +1,33 @@
+body {
+  background: #F3F3F3;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+a, a:hover, a:focus {
+  color: #121515;
+}
+
+
+
+/* Form */
+.auth-forms {
+  max-width:400px;
+  margin:0 auto;  
+  padding:1px 25px 25px 25px;
+}
+
+/* Nav Bar */
+.navbar {
+  margin-bottom: 0px;
+}
+
+.title {
+  text-align: center;
+}
+
+.img-circle.gravatar {
+  width: 30px;
+}

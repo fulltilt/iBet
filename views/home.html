@@ -1,0 +1,38 @@
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-offset-1 col-md-4">
+			<div class="list-group">
+					<!-- SEARCH TOOL -->
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</div>
+				      		<input type="text" ng-model="searchTask" class="form-control" placeholder="Search">
+				    	</div>	
+					</div>		
+					
+					<!-- BET LIST -->	
+					<a ng-repeat="bet in betss | filter: {title: searchTask, status: '!cancelled' } | orderBy: 'datetime':true" ng-href="#/browse/{{bet.$id}}">
+						<div class="list-group-item">
+							<div class="row-picture">
+								<img class="circle" ng-src="{{bet.gravatar}}">
+							</div>    
+					        <div class="row-content">
+					            <h4 class="list-group-item-heading">{{bet.title | limitTo:25}}{{ bet.title.length > 25? "..." : ""}}</h4>
+					            <span class="list-group-item-text">
+					            	<span am-time-ago="{{bet.datetime}}"></span>
+					            </span>		            
+					        </div>
+					        <div class="payment">
+					        	<div>${{bet.total}}</div>
+					        	<span class="label status {{bet.status}}">{{bet.status}}</span>
+					        </div>
+					    </div>		    
+				    	<div class="list-group-separator"></div>
+			    	</a>
+			</div>
+		</div>
+	</div>
+</div>
