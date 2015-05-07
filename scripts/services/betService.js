@@ -22,7 +22,7 @@ app.factory('Bet', function(FURL, $firebase, Auth) {
 						title: bet.title
 					};
 
-					$firebase(ref.child('user_bets').child(bet.poster)).$push(obj);
+					$firebase(ref.child('user_bets').child(bet.bettor)).$push(obj);
 					return newBet;
 				});
 		},
@@ -38,7 +38,7 @@ app.factory('Bet', function(FURL, $firebase, Auth) {
 						title: bet.title
 					};
 
-					return $firebase(ref.child('user_bets').child(bet.runner)).$push(obj);
+					return $firebase(ref.child('user_bets').child(bet.bettee)).$push(obj);
 				});
 		},
 
@@ -47,6 +47,7 @@ app.factory('Bet', function(FURL, $firebase, Auth) {
 			return t.$update({
 				title: bet.title,
 				description: bet.description,
+				bettee: bet.bettee,
 				total: bet.total
 			});
 		},
@@ -59,7 +60,7 @@ app.factory('Bet', function(FURL, $firebase, Auth) {
 		},
 
 		isCreator: function(bet) {
-			return (user && user.provider && user.uid === bet.poster);
+			return (user && user.provider && user.uid === bet.bettor);
 		},
 
 		isOpen: function(bet) {
@@ -74,7 +75,7 @@ app.factory('Bet', function(FURL, $firebase, Auth) {
 		},
 
 		isAssignee: function(bet) {
-			return (user && user.provider && user.uid === bet.runner);
+			return (user && user.provider && user.uid === bet.bettee);
 		},
 
 		isCompleted: function(bet) {

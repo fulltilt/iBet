@@ -39,6 +39,12 @@ var app = angular
         controller: "AuthController",
         cache: false
       })
+      .state("browse", {
+        url: "/:betId",
+        templateUrl: "views/home.html",
+        controller: "HomeController",
+        cache: false
+      })      
       .state("dashboard", {
         url: "/dashboard",
         templateUrl: "views/dashboard.html",

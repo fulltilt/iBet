@@ -1,11 +1,12 @@
 'user strict';
 
-app.controller('BetController', function($scope, $location, toaster, Bet, Auth, Comment) {
+app.controller('BetController', function($scope, $state, toaster, Bet, Auth, Comment) {
 	$scope.createBet = function() {
 		$scope.bet.status = 'open';
 		$scope.bet.gravatar = Auth.user.profile.gravatar;
 		$scope.bet.name = Auth.user.profile.name;
-		$scope.bet.poster = Auth.user.uid;
+		$scope.bet.bettor = Auth.user.uid;
+		//$scope.bet.bettee = Auth.user.uid;
 
 		Bet.createBet($scope.bet)
 			.then(function(ref) {
@@ -14,14 +15,17 @@ app.controller('BetController', function($scope, $location, toaster, Bet, Auth, 
 				$scope.bet = {
 					title: '',
 					description: '',
+					bettee: '',
 					total: '',
 					status: 'open',
 					gravatar: '',
 					name: '',
-					poster: ''
+					bettor: ''
 				};
-
-				$location.path('/browse/' + ref.key());
+				
+				// using $state to redirect inside a controller and passing a parameter
+				//$state.go('browse', { betId: ref.key() });
+				$state.go('home');
 			});
 	};
 

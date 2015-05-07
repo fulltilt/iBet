@@ -10,12 +10,12 @@
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</div>
-			      		<input type="text" ng-model="searchTask" class="form-control" placeholder="Search">
+			      		<input type="text" ng-model="searchBet" class="form-control" placeholder="Search">
 			    	</div>	
 				</div>		
 				
 				<!-- BET LIST -->	
-				<a ng-repeat="bet in betss | filter: {title: searchTask, status: '!cancelled' } | orderBy: 'datetime':true" ng-href="#/browse/{{bet.$id}}">
+				<a ng-repeat="bet in bets | filter: {title: searchBet, status: '!cancelled' } | orderBy: 'datetime':true" ng-href="#/{{bet.$id}}">
 					<div class="list-group-item">
 						<div class="row-picture">
 							<img class="circle" ng-src="{{bet.gravatar}}">
@@ -46,37 +46,37 @@
 				<!-- HEADER -->
 				<div class="row">
 					<div class="col-md-8">
-						<h3>{{selectedTask.title}}</h3>
+						<h3>{{selectedBet.title}}</h3>
 						<span>
-							<img ng-src="{{selectedTask.gravatar}}" class="img-circle gravatar">
-							Posted by {{selectedTask.name}} -
-							<span am-time-ago="1421840368791"></span>&nbsp;
-							<span class="label status {{selectedTask.status}}">{{selectedTask.status}}</span>
+							<img ng-src="{{selectedBet.gravatar}}" class="img-circle gravatar">
+							Posted by {{selectedBet.name}} -
+							<span am-time-ago="{{selectedBet.datetime}}"></span>&nbsp;
+							<span class="label status {{selectedBet.status}}">{{selectedBet.status}}</span>
 						</span>
 					</div>
 
 					<div class="col-md-4 title">
 						<div class="price-tag">
-							${{selectedTask.total}}
+							${{selectedBet.total}}
 						
-							<div ng-show="isTaskCreator(selectedTask) && isOpen(selectedTask)">
+							<div ng-show="isBetCreator(selectedBet) && isOpen(selectedBet)">
 								<div class="btn-group">
 								    <a href="" class="btn btn-warning">Admin</a>
 								    <a href="" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
 								    <ul class="dropdown-menu">
-								        <li><a href="" data-toggle="modal" data-target="#ediModal">EDIT TASK</a></li>							        
+								        <li><a href="" data-toggle="modal" data-target="#ediModal">EDIT BET</a></li>							        
 								        <li class="divider"></li>
-								        <li><a href="" ng-click="cancelTask(selectedTask.$id)">CANCEL TASK</a></li>
+								        <li><a href="" ng-click="cancelBet(selectedBet.$id)">CANCEL BET</a></li>
 								    </ul>
 								</div>
 							</div>
 
-							<div ng-show="isOpen(selectedTask) && !isTaskCreator(selectedTask) && !alreadyOffered">
+							<div ng-show="isOpen(selectedBet) && !isBetCreator(selectedBet) && !alreadyOffered">
 								<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#offModal">Make an Offer</button>
 							</div>
 
-							<div ng-show="isAssignee(selectedTask) && !isCompleted(selectedTask)">
-								<button class="btn btn-danger btn-sm" ng-click="completeTask(selectedTask.$id)">Complete</button>
+							<div ng-show="isAssignee(selectedBet) && !isCompleted(selectedBet)">
+								<button class="btn btn-danger btn-sm" ng-click="completeBet(selectedBet.$id)">Complete</button>
 							</div>
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 						        <h3 class="panel-title">Description</h3>
 						    </div>
 						    <div class="panel-body">
-						        {{selectedTask.description}}
+						        {{selectedBet.description}}
 						    </div>
 						</div>
 					</div>
@@ -114,9 +114,9 @@
 									<div class="col-md-10">
 										<button ng-show="offer.accepted" class="btn btn-success btn-xs disabled">Assigned</button>
 
-										<button ng-show="isTaskCreator(selectedTask) && isOpen(selectedTask)" class="btn btn-info btn-xs" ng-click="acceptOffer(offer.$id, offer.uid)">Accept</button>
+										<button ng-show="isBetCreator(selectedBet) && isOpen(selectedBet)" class="btn btn-info btn-xs" ng-click="acceptOffer(offer.$id, offer.uid)">Accept</button>
 
-										<button ng-show="isOfferMaker(offer) && isOpen(selectedTask)" class="btn btn-danger btn-xs" ng-click="cancelOffer(offer.$id)">Cancel My Offer - ${{offer.total}}</button>
+										<button ng-show="isOfferMaker(offer) && isOpen(selectedBet)" class="btn btn-danger btn-xs" ng-click="cancelOffer(offer.$id)">Cancel My Offer - ${{offer.total}}</button>
 
 										<img ng-src="{{offer.gravatar}}" class="img-circle offer gravatar">
 										<span>{{offer.name}}</span>
@@ -138,7 +138,7 @@
 
 							<div class="panel-body">
 								<div class="title" ng-hide="comments && comments.length > 0">
-									<span>NO COMMENTS ABOUT THIS TASK</span>
+									<span>NO COMMENTS ABOUT THIS BET</span>
 								</div>
 								<br>
 
@@ -158,7 +158,7 @@
 									</div>
 								</div>
 
-								<div class="row" ng-show="isOpen(selectedTask)">
+								<div class="row" ng-show="isOpen(selectedBet)">
 									<div class="col-md-12">
 										<form ng-submit="addComment()">
 											<div class="input-group">

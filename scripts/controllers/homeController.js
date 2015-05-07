@@ -7,7 +7,7 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 	$scope.listMode = true;
 	$scope.user = Auth.user;
 
-	if($stateParams.betId) {
+	if ($stateParams.betId) {
 		var bet = Bet.getBet($stateParams.betId).$asObject();
 		$scope.listMode = false;
 		setSelectedBet(bet);
@@ -17,10 +17,10 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 		$scope.selectedBet = bet;
 
 		if ($scope.signedIn()) {
-			// Check if the current login used has already made an stake for selected item
-			Stake.isStakeed(bet.$id)
+			// Check if the current login used has already made a stake for selected item
+			Stake.isStaked(bet.$id)
 				.then(function(data) {
-					$scope.alreadyStakeed = data;
+					$scope.alreadyStaked = data;
 				});
 
 			$scope.isBetCreator = Bet.isCreator;
@@ -68,7 +68,7 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 				toaster.pop('success', 'Your stake has been placed');
 				$scope.total = '';
 				$scope.block = true;
-				$scope.alreadyStakeed = true;
+				$scope.alreadyStaked = true;
 			});
 	};
 
@@ -77,7 +77,7 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 			.then(function() {
 				toaster.pop('success', 'Your stake has been cancelled.');
 
-				$scope.alreadyStakeed = false;
+				$scope.alreadyStaked = false;
 				$scope.block = false;
 			});
 	};
