@@ -1,4 +1,4 @@
-<div class="modal fade" id="ediModal" ng-controller="TaskController">
+<div class="modal fade" id="ediModal" ng-controller="BetController">
   <div class="modal-dialog">
     <div class="modal-content">
       
@@ -10,11 +10,12 @@
         </div>
 
         <div class="panel-body">
-          <form ng-submit="editTask(selectedTask)">            
-            <input type="text" ng-model="selectedTask.title" class="form-control" placeholder="Task title" required><br>  
-            <textarea ng-model="selectedTask.description" row="3" class="form-control" placeholder="Describe what you need done" required></textarea><br>
-            <input type="number" ng-model="selectedTask.total" class="form-control" placeholder="How much will you pay?" required><br>
-            <input type="submit" value="Update" class="btn btn-info">
+          <form ng-submit="editBet(selectedBet)">            
+                <input type="text" ng-model="selectedBet.title" class="form-control" placeholder="Bet title" required><br>
+                <textarea ng-model="selectedBet.description" class="form-control" placeholder="Describe the bet" required></textarea><br>
+                <input type="email" ng-model="selectedBet.bettee" class="form-control" placeholder="Who will you be betting (email)?" required><br>
+                <input type="number" ng-model="selectedBet.total" class="form-control" placeholder="How much will you wager?" required><br>
+                <input type="submit" value="Update" class="btn btn-info">
           </form>
         </div>
 
