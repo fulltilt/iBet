@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
+app.factory('Auth', function(FURL, $firebaseAuth, $firebase, $q) {
 	var ref = new Firebase(FURL);
 	var auth = $firebaseAuth(ref);
 
@@ -15,6 +15,7 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
 			};
 
 			var profileRef = $firebase(ref.child('profile'));
+
 			return profileRef.$set(uid, profile);
 		},
 
@@ -56,7 +57,27 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase) {
 
     requireAuth: function() {
       return auth.$requireAuth();
-    }    
+    },
+
+    doesUserExist: function (username)  {
+      var d = $q.defer();
+
+      var profileRef = $firebase(ref.child('profile').orderByChild('name')
+        .equalTo(username))
+        .$asArray()
+        .$loaded()
+        .then(function (data) {
+          d.resolve(data.length > 0);
+        }, function() {
+          d.reject(false);
+        });
+      
+      return d.promise;
+
+      // profileRef.on('value', function(snapshot) {
+      //   return snapshot.val() !== null;
+      // });
+    }
 	};
 
 	auth.$onAuth(function(authData) {

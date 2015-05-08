@@ -14,17 +14,22 @@ app.factory('Bet', function(FURL, $firebase, Auth) {
 
 		createBet: function(bet) {
 			bet.datetime = Firebase.ServerValue.TIMESTAMP;
-			return bets.$add(bet)
-				.then(function(newBet) {
-					var obj = {
-						betId: newBet.key(),
-						type: true,
-						title: bet.title
-					};
 
-					$firebase(ref.child('user_bets').child(bet.bettor)).$push(obj);
-					return newBet;
+			Auth.doesUserExist(bet.bettee)
+				.then(function(data) {
+					console.log(data);
 				});
+			// return bets.$add(bet)
+			// 	.then(function(newBet) {
+			// 		var obj = {
+			// 			betId: newBet.key(),
+			// 			type: true,
+			// 			title: bet.title
+			// 		};
+
+			// 		$firebase(ref.child('user_bets').child(bet.bettor)).$push(obj);
+			// 		return newBet;
+			// 	});
 		},
 
 		createUserBets: function(betId) {
