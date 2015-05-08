@@ -12,7 +12,8 @@ app.controller('AuthController', function($scope, $location, Auth, toaster) {
 				toaster.pop('success', 'Registered successfully.');
 				$location.path('/');
 			}, function(err) {
-				toaster.pop('error', 'Oops, something went wrong...');
+				console.log(err)
+				toaster.pop('error', 'Oops, something went wrong during registration...');
 			});
 	};
 
@@ -22,7 +23,8 @@ app.controller('AuthController', function($scope, $location, Auth, toaster) {
 				toaster.pop('success', 'Logged in successfully!');
 				$location.path('/');
 			}, function(err) {
-				toaster.pop('error', 'Oops, something went wrong...');
+				console.log(err)
+				toaster.pop('error', 'Oops, something went wrong while logging in...');
 			});
 	};
 
@@ -37,7 +39,7 @@ app.controller('AuthController', function($scope, $location, Auth, toaster) {
 				toaster.pop('success', 'Password changed successfully!');
 			}, function(err) {
 				console.log(err)
-				toaster.pop('error', 'Oops, something went wrong...');
+				toaster.pop('error', 'Oops, something went wrong during password change...');
 			});
 	};
 });

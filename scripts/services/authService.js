@@ -10,7 +10,7 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase, $q) {
 		createProfile: function(uid, user) {
 			var profile = {
 				name: user.name,
-				email: user.email,
+				email: emailToKey(user.email),
 				gravatar: get_gravatar(user.email, 40)
 			};
 
@@ -59,11 +59,11 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase, $q) {
       return auth.$requireAuth();
     },
 
-    doesUserExist: function (username)  {
+    doesUserExist: function (email)  {
       var d = $q.defer();
 
-      var profileRef = $firebase(ref.child('profile').orderByChild('name')
-        .equalTo(username))
+      var profileRef = $firebase(ref.child('profile').orderByChild('email')
+        .equalTo(emailToKey(email)))
         .$asArray()
         .$loaded()
         .then(function (data) {
@@ -73,10 +73,6 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase, $q) {
         });
       
       return d.promise;
-
-      // profileRef.on('value', function(snapshot) {
-      //   return snapshot.val() !== null;
-      // });
     }
 	};
 
@@ -93,6 +89,12 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase, $q) {
 		}
 	});
 
+  // Base64 encode emails to avoid Firebase invalid character issues
+  function emailToKey(emailAddress){
+    return btoa(emailAddress);
+  }
+
+  // calculate gravatar hash
 	function get_gravatar(email, size) {
 
       email = email.toLowerCase();

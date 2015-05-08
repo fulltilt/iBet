@@ -13,7 +13,7 @@
 					<form ng-submit="createBet()">              
 				        <input type="text" ng-model="bet.title" class="form-control" placeholder="Bet title" required><br>
 				        <textarea ng-model="bet.description" class="form-control" placeholder="Describe the bet" required></textarea><br>
-				        <input type="text" ng-model="bet.bettee" class="form-control" placeholder="Who will you be betting?" required><br>
+				        <input type="email" ng-model="bet.bettee" class="form-control" placeholder="Who will you be betting?" required><br>
 				        <input type="number" ng-model="bet.total" class="form-control" placeholder="How much will you wager?" required><br>
 				        <input type="submit" value="Post" class="btn btn-warning">
 				    </form>
