@@ -10,6 +10,11 @@ app.controller('BetController', function($scope, $state, toaster, Bet, Auth, Com
 
 		Bet.createBet($scope.bet)
 			.then(function(ref) {
+				if (ref === false) {
+					toaster.pop('error', 'Error: invalid bettee!');
+					return;
+				}
+
 				toaster.pop('success', 'Bet created successfully!');
 				
 				$scope.bet = {

@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Bet', function(FURL, $firebase, Auth) {
+app.factory('Bet', function(FURL, $firebase, Auth, $q) {
 	var ref = new Firebase(FURL);
 	var bets = $firebase(ref.child('bets')).$asArray();
 	var user = Auth.user;
@@ -12,24 +12,41 @@ app.factory('Bet', function(FURL, $firebase, Auth) {
 			return $firebase(ref.child('bets').child(betId));
 		},
 
+		getUserBets: function (uid) {
+			return $firebase(ref.child('user_bets').child(uid));
+		},
+
 		createBet: function(bet) {
 			bet.datetime = Firebase.ServerValue.TIMESTAMP;
+			var d = $q.defer();
 
+			// check to see if bettee exists, if so, place bet
 			Auth.doesUserExist(bet.bettee)
 				.then(function(data) {
-					console.log(data);
-				});
-			// return bets.$add(bet)
-			// 	.then(function(newBet) {
-			// 		var obj = {
-			// 			betId: newBet.key(),
-			// 			type: true,
-			// 			title: bet.title
-			// 		};
+					if (data !== false) {
+						var betteeId = data;
+						bets.$add(bet)
+							.then(function(newBet) {
+								var obj = {
+									betId: newBet.key(),
+									type: true,
+									title: bet.title,
+									bettor: bet.bettor
+								};
 
-			// 		$firebase(ref.child('user_bets').child(bet.bettor)).$push(obj);
-			// 		return newBet;
-			// 	});
+								$firebase(ref.child('bettor_bets').child(bet.bettor)).$push(obj);
+								$firebase(ref.child('bettee_bets').child(betteeId)).$push(obj);
+							});
+					}
+
+					d.resolve(data !== false);	
+				}, function() {
+		          	d.reject(false);
+		        });
+			
+			return d.promise;
+
+			
 		},
 
 		createUserBets: function(betId) {

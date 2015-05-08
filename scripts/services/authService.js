@@ -67,7 +67,11 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase, $q) {
         .$asArray()
         .$loaded()
         .then(function (data) {
-          d.resolve(data.length > 0);
+          if (data.length === 0) {
+            d.resolve(false);
+          } else {
+            d.resolve(data[0].$id); // if bettee found, return bettee id
+          }
         }, function() {
           d.reject(false);
         });
@@ -89,7 +93,7 @@ app.factory('Auth', function(FURL, $firebaseAuth, $firebase, $q) {
 		}
 	});
 
-  // Base64 encode emails to avoid Firebase invalid character issues
+  // Base64 encode email address to avoid Firebase invalid character issues
   function emailToKey(emailAddress){
     return btoa(emailAddress);
   }
