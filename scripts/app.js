@@ -14,6 +14,7 @@ var app = angular
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams,  error) {
       // We can catch the error thrown when the $requireAuth promise is rejected
       // and redirect the user back to the login page
+      console.log('Error:',error)
       if (error === 'AUTH_REQUIRED') {
         $state.go('login');
       }
@@ -39,12 +40,6 @@ var app = angular
         controller: "AuthController",
         cache: false
       })
-      .state("browse", {
-        url: "/:betId",
-        templateUrl: "views/home.html",
-        controller: "HomeController",
-        cache: false
-      })      
       .state("dashboard", {
         url: "/dashboard",
         templateUrl: "views/dashboard.html",
@@ -55,7 +50,13 @@ var app = angular
           }
         },
         cache: false
-      });
+      })
+      .state("browse", {
+        url: "/browse/:betId",
+        templateUrl: "views/home.html",
+        controller: "HomeController",
+        cache: false
+      });      
     
     $urlRouterProvider.otherwise('/');
   });

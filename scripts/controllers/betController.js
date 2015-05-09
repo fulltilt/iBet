@@ -6,7 +6,6 @@ app.controller('BetController', function($scope, $state, toaster, Bet, Auth, Com
 		$scope.bet.gravatar = Auth.user.profile.gravatar;
 		$scope.bet.name = Auth.user.profile.name;
 		$scope.bet.bettor = Auth.user.uid;
-		//$scope.bet.bettee = Auth.user.uid;
 
 		Bet.createBet($scope.bet)
 			.then(function(ref) {

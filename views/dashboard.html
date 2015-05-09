@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<h2 class="title">Dashboard</h2>
+		<br>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<h3 class="panel-title">Initiated <span class="badge">{{numInitiatedBets}}</span></h3>
+					</div>
+					<div class="panel-body">
+						<div ng-if="numPoster === 0">You haven't posted any bets yet</div>
+						<div ng-repeat="bet in initiatedBets">
+							<a ng-href="#/browse/{{bet.betId}}"> {{bet.title}} </a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title">Offered <span class="badge">{{numOfferedBets}}</span></h3>
+					</div>
+					<div class="panel-body">
+						<div ng-if="numRunner === 0">You haven't been offered any bets yet</div>
+						<div ng-repeat="bet in offeredBets">
+							<a ng-href="#/browse/{{bet.betId}}"> {{bet.title}} </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

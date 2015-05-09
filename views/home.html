@@ -15,7 +15,7 @@
 				</div>		
 				
 				<!-- BET LIST -->	
-				<a ng-repeat="bet in bets | filter: {title: searchBet, status: '!cancelled' } | orderBy: 'datetime':true" ng-href="#/{{bet.$id}}">
+				<a ng-repeat="bet in bets | filter: {title: searchBet, status: '!cancelled' } | orderBy: 'datetime':true" ng-href="#/browse/{{bet.$id}}">
 					<div class="list-group-item">
 						<div class="row-picture">
 							<img class="circle" ng-src="{{bet.gravatar}}">
@@ -184,9 +184,8 @@
 	</div>
 	<div class="row">
 		<ul>
-			<li>Home will display all bets</li>
-			<li>Dashboard will display all bets for each particular user separated by bets proposed and bets given</li>
-			<li>Still have to implement functionality to accept bet</li>
+			<li>Still have to implement functionality to accept bet (try to aggregate Stake service into Bet)</li>
+			<li>Refactor dashboard</li>
 		</ul>
 	</div>
 </div>

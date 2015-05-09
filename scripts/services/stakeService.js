@@ -34,7 +34,7 @@ app.factory('Stake', function(FURL, $firebase, $q, Auth, Bet) {
 			}
 		},
 
-		isMaker: function(stake) {
+		isBettor: function(stake) {
 			return (user && user.provider && user.uid === stake.uid);
 		},
 

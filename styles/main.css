@@ -19,6 +19,7 @@ a, a:hover, a:focus {
   padding:1px 25px 25px 25px;
 }
 
+
 /* Panel */
 .panel-title {
   font-weight: bold;
@@ -123,7 +124,6 @@ a, a:hover, a:focus {
 }
 
 /* Comments */
-
 .well.well-sm.cmt {
   color: rgba(94, 94, 94, 1);
   font-size: 14px;
