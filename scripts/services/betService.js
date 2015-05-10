@@ -91,23 +91,35 @@ app.factory('Bet', function(FURL, $firebase, Auth, $q) {
 			});
 		},
 
+		putInPendingComplete: function(betId) {
+			var t = this.getBet(betId);
+			return t.$update({
+				status: 'pending'
+			});	
+		},
+
 		completeBet: function(betId) {
 			var t = this.getBet(betId);
 			return t.$update({
 				status: 'completed'
 			});
-		},
+		}, 
 
 		isCreator: function(bet) {
 			return (user && user.provider && user.uid === bet.bettor);
 		},
 
 		isOpen: function(bet) {
-			return bet.status === 'open' || bet.status === 'accepted';
+			return bet.status === 'open';
 		},
 
 		isAccepted: function(bet) {
 			return (user && user.provider && bet.status === 'accepted');
+		},
+
+		// this function determines whether or not creator initiated Complete process
+		isPending: function(bet) {
+			return bet.status === 'pending';
 		},
 
 		isCompleted: function(bet) {

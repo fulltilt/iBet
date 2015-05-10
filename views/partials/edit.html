@@ -1,0 +1,25 @@
+<div class="modal fade" id="ediModal" ng-controller="BetController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="panel panel-info title">
+
+        <div class="panel-heading title">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
+            <h3 class="panel-title">Edit Bet</h3>
+        </div>
+
+        <div class="panel-body">
+          <form ng-submit="editBet(selectedBet)">            
+                <input type="text" ng-model="selectedBet.title" class="form-control" placeholder="Bet title" required><br>
+                <textarea ng-model="selectedBet.description" class="form-control" placeholder="Describe the bet" required></textarea><br>
+                <input type="email" ng-model="selectedBet.bettee" class="form-control" placeholder="Who will you be betting?" required><br>
+                <input type="number" ng-model="selectedBet.total" class="form-control" placeholder="How much will you wager?" required><br>
+
+                <input type="submit" value="Update" class="btn btn-info">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

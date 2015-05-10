@@ -63,18 +63,25 @@
 								<div class="btn-group">
 								    <a href="" class="btn btn-warning">Admin</a>
 								    <a href="" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-								    <ul class="dropdown-menu">						        
-								        <li class="divider"></li>
+								    <ul class="dropdown-menu">
+								    	<li><a href="" data-toggle="modal" data-target="#ediModal">EDIT BET</a></li>							        
+								        <li class="divider"></li>		        
 								        <li><a href="" ng-click="cancelBet(selectedBet.$id)">CANCEL BET</a></li>
 								    </ul>
 								</div>
 							</div>
 
-							<div ng-show="!isBetCreator(selectedBet) && !isAccepted(selectedBet)">
+							<div ng-show="!isBetCreator(selectedBet) && isOpen(selectedBet)">
 								<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#accModal">Accept Bet</button>
 							</div>
 
+							<!-- Complete button for bettor -->
 							<div ng-show="isBetCreator(selectedBet) && isAccepted(selectedBet) && !isCompleted(selectedBet)">
+								<button class="btn btn-danger btn-sm" ng-click="putInPendingComplete(selectedBet.$id)">Complete</button>
+							</div>
+
+							<!-- Complete button for bettee -->
+							<div ng-show="!isBetCreator(selectedBet) && isPending(selectedBet)">
 								<button class="btn btn-danger btn-sm" ng-click="completeBet(selectedBet.$id)">Complete</button>
 							</div>
 						</div>
@@ -153,7 +160,7 @@
 	</div>
 	<div class="row">
 		<ul>
-			<li>Implement functionality where bet doesn't get completed until both parties click Complete. This should also apply if the creator edits the bet</li>
+
 		</ul>
 	</div>
 </div>

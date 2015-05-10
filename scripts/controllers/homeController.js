@@ -11,7 +11,6 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 		var bet = Bet.getBet($stateParams.betId).$asObject();
 		$scope.listMode = false;
 		setSelectedBet(bet);
-		console.log($stateParams.betId)
 	};
 
 	function setSelectedBet(bet) {
@@ -21,11 +20,19 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 			$scope.isBetCreator = Bet.isCreator;
 			$scope.isOpen = Bet.isOpen;
 			$scope.isAccepted = Bet.isAccepted;
+			$scope.isPending = Bet.isPending;
 			$scope.isCompleted = Bet.isCompleted;
 		}
 
 		$scope.comments = Comment.comments(bet.$id);
 		$scope.block = false;	// block is used to enforce bet conditions
+	};
+
+	$scope.putInPendingComplete = function(betId) {
+		Bet.putInPendingComplete(betId)
+			.then(function() {
+				toaster.pop('success', 'This bet is now in Pending Complete status.');
+			});
 	};
 
 	$scope.completeBet = function(betId) {

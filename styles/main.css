@@ -119,7 +119,7 @@ a, a:hover, a:focus {
   background-color: green;
 }
 
-.cancelled {
+.pending {
   background-color: red;
 }
 

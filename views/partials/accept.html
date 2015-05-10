@@ -6,8 +6,8 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 					<h3 class="panel-title">Accept Bet</h3>
 				</div>
-
 				<div class="panel-body">
+					<p>Are you sure you want to accept the bet? The bet details can no longer be modified after the bet is accepted.</p>
 					<form ng-submit="acceptBet(selectedBet)">
 						<input type="submit" value="Accept Bet?" class="btn btn-info" ng-disabled="$parent.block">
 					</form>
