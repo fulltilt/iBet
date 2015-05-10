@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Dashboard', function(FURL, $firebase, $q) {
+app.factory('Dashboard', function(FURL, $firebase, $stateParams, $q) {
 	var ref = new Firebase(FURL);
 
 	var Dashboard = {

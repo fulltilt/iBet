@@ -7,7 +7,7 @@
 			<div class="col-md-6">
 				<div class="panel panel-warning">
 					<div class="panel-heading">
-						<h3 class="panel-title">Initiated <span class="badge">{{numInitiatedBets}}</span></h3>
+						<h3 class="panel-title">Initiated Bets <span class="badge">{{numInitiatedBets}}</span></h3>
 					</div>
 					<div class="panel-body">
 						<div class="list-group">
@@ -22,7 +22,7 @@
 							</div>		
 							
 							<!-- BET LIST -->	
-							<a ng-repeat="bet in initiatedBets | filter: {title: searchInitBet} | orderBy: 'datetime':true" ng-href="#/browse/{{bet.$id}}">
+							<a ng-repeat="bet in initiatedBets | filter: {title: searchInitBet} | orderBy: 'datetime':true" ng-href="#/browse/{{bet.betId}}">
 								<div class="list-group-item">
 									<div class="row-picture">
 										<img class="circle" ng-src="{{bet.gravatar}}">
@@ -48,7 +48,7 @@
 			<div class="col-md-6">
 				<div class="panel panel-success">
 					<div class="panel-heading">
-						<h3 class="panel-title">Offered <span class="badge">{{numOfferedBets}}</span></h3>
+						<h3 class="panel-title">Offered Bets <span class="badge">{{numOfferedBets}}</span></h3>
 					</div>
 					<div class="panel-body">
 						<div class="list-group">
@@ -63,7 +63,7 @@
 							</div>		
 							
 							<!-- BET LIST -->	
-							<a ng-repeat="bet in offeredBets | filter: {title: searchOffBet} | orderBy: 'datetime':true" ng-href="#/browse/{{bet.$id}}">
+							<a ng-repeat="bet in offeredBets | filter: {title: searchOffBet} | orderBy: 'datetime':true" ng-href="#/browse/{{bet.betId}}">
 								<div class="list-group-item">
 									<div class="row-picture">
 										<img class="circle" ng-src="{{bet.gravatar}}">

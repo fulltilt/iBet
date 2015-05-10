@@ -11,6 +11,7 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 		var bet = Bet.getBet($stateParams.betId).$asObject();
 		$scope.listMode = false;
 		setSelectedBet(bet);
+		console.log($stateParams.betId)
 	};
 
 	function setSelectedBet(bet) {
