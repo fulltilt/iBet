@@ -10,10 +10,37 @@
 						<h3 class="panel-title">Initiated <span class="badge">{{numInitiatedBets}}</span></h3>
 					</div>
 					<div class="panel-body">
-						<div ng-if="numInitiatedBets === 0">You haven't posted any bets yet</div>
-						<div ng-repeat="bet in initiatedBets">
-							<a ng-href="#/browse/{{bet.betId}}"> {{bet.title}} </a>
-						</div>
+						<div class="list-group">
+							<!-- SEARCH TOOL -->
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</div>
+						      		<input type="text" ng-model="searchInitBet" class="form-control" placeholder="Search">
+						    	</div>	
+							</div>		
+							
+							<!-- BET LIST -->	
+							<a ng-repeat="bet in initiatedBets | filter: {title: searchInitBet} | orderBy: 'datetime':true" ng-href="#/browse/{{bet.$id}}">
+								<div class="list-group-item">
+									<div class="row-picture">
+										<img class="circle" ng-src="{{bet.gravatar}}">
+									</div>    
+							        <div class="row-content">
+							            <h4 class="list-group-item-heading">{{bet.title | limitTo:25}}{{ bet.title.length > 25? "..." : ""}}</h4>
+							            <span class="list-group-item-text">
+							            	<span am-time-ago="{{bet.datetime}}"></span>
+							            </span>		            
+							        </div>
+							        <div class="payment">
+							        	<div>${{bet.total}}</div>
+							        	<!-- <span class="label status {{bet.status}}">{{bet.status}}</span> -->
+							        </div>
+							    </div>		    
+						    	<div class="list-group-separator"></div>
+					    	</a>
+						</div>					
 					</div>
 				</div>
 			</div>
@@ -24,9 +51,36 @@
 						<h3 class="panel-title">Offered <span class="badge">{{numOfferedBets}}</span></h3>
 					</div>
 					<div class="panel-body">
-						<div ng-if="numOfferedBets === 0">You haven't been offered any bets yet</div>
-						<div ng-repeat="bet in offeredBets">
-							<a ng-href="#/browse/{{bet.betId}}"> {{bet.title}} </a>
+						<div class="list-group">
+							<!-- SEARCH TOOL -->
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</div>
+						      		<input type="text" ng-model="searchOffBet" class="form-control" placeholder="Search">
+						    	</div>	
+							</div>		
+							
+							<!-- BET LIST -->	
+							<a ng-repeat="bet in offeredBets | filter: {title: searchOffBet} | orderBy: 'datetime':true" ng-href="#/browse/{{bet.$id}}">
+								<div class="list-group-item">
+									<div class="row-picture">
+										<img class="circle" ng-src="{{bet.gravatar}}">
+									</div>    
+							        <div class="row-content">
+							            <h4 class="list-group-item-heading">{{bet.title | limitTo:25}}{{ bet.title.length > 25? "..." : ""}}</h4>
+							            <span class="list-group-item-text">
+							            	<span am-time-ago="{{bet.datetime}}"></span>
+							            </span>		            
+							        </div>
+							        <div class="payment">
+							        	<div>${{bet.total}}</div>
+							        	<!-- <span class="label status {{bet.status}}">{{bet.status}}</span> -->
+							        </div>
+							    </div>		    
+						    	<div class="list-group-separator"></div>
+					    	</a>
 						</div>
 					</div>
 				</div>

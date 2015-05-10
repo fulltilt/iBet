@@ -10,7 +10,7 @@
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</div>
-			      		<input type="text" ng-model="searcfhBet" class="form-control" placeholder="Search">
+			      		<input type="text" ng-model="searchBet" class="form-control" placeholder="Search">
 			    	</div>	
 				</div>		
 				
@@ -59,7 +59,7 @@
 						<div class="price-tag">
 							${{selectedBet.total}}
 						
-							<div ng-show="isBetCreator(selectedBet) && isOpen(selectedBet)">
+							<div ng-show="isBetCreator(selectedBet) && isOpen(selectedBet) && !isAccepted(selectedBet)">
 								<div class="btn-group">
 								    <a href="" class="btn btn-warning">Admin</a>
 								    <a href="" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -71,11 +71,11 @@
 								</div>
 							</div>
 
-							<div ng-show="isOpen(selectedBet) && !isBetCreator(selectedBet) && !alreadyAccepted">
+							<div ng-show="!isBetCreator(selectedBet) && !isAccepted(selectedBet)">
 								<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#accModal">Accept Bet</button>
 							</div>
 
-							<div ng-show="isAssignee(selectedBet) && !isCompleted(selectedBet)">
+							<div ng-show="isBetCreator(selectedBet) && isAccepted(selectedBet) && !isCompleted(selectedBet)">
 								<button class="btn btn-danger btn-sm" ng-click="completeBet(selectedBet.$id)">Complete</button>
 							</div>
 						</div>
@@ -154,8 +154,7 @@
 	</div>
 	<div class="row">
 		<ul>
-			<li>Still have to implement functionality to accept bet (try to aggregate Stake service into Bet)</li>
-			<li>Refactor dashboard</li>
+			<li>Implement functionality where bet doesn't get completed until both parties click Complete</li>
 		</ul>
 	</div>
 </div>

@@ -29,9 +29,12 @@ app.factory('Bet', function(FURL, $firebase, Auth, $q) {
 							.then(function(newBet) {
 								var obj = {
 									betId: newBet.key(),
-									type: true,
 									title: bet.title,
-									bettor: bet.bettor
+									bettor: bet.bettor,
+									gravatar: bet.gravatar,
+									status: bet.status,
+									datetime: bet.datetime,
+									total: bet.total
 								};
 
 								$firebase(ref.child('bettor_bets').child(bet.bettor)).$push(obj);
@@ -81,7 +84,7 @@ app.factory('Bet', function(FURL, $firebase, Auth, $q) {
 			});
 		},
 
-		acceptBet: function(bet) {	
+		acceptBet: function(bet) {
 			var t = this.getBet(bet.$id);
 			return t.$update({
 				status: 'accepted'
@@ -103,8 +106,8 @@ app.factory('Bet', function(FURL, $firebase, Auth, $q) {
 			return bet.status === 'open' || bet.status === 'accepted';
 		},
 
-		isAssignee: function(bet) {
-			return (user && user.provider && user.uid === bet.bettee);
+		isAccepted: function(bet) {
+			return (user && user.provider && bet.status === 'accepted');
 		},
 
 		isCompleted: function(bet) {

@@ -115,8 +115,12 @@ a, a:hover, a:focus {
   background-color: #03a9f4;
 }
 
-.assigned {
-  background-color: #9e9e9e;
+.accepted {
+  background-color: green;
+}
+
+.cancelled {
+  background-color: red;
 }
 
 .completed {

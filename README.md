@@ -1,0 +1,3 @@
+-may be able to consolidate denormalized bettor_bets and bettee_bets
+-on a related note, when changing the status of a bet, denormalized tables above currently don't get updated
+-

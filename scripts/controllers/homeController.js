@@ -19,12 +19,19 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 		if ($scope.signedIn()) {
 			$scope.isBetCreator = Bet.isCreator;
 			$scope.isOpen = Bet.isOpen;
-			$scope.isAssignee = Bet.isAssignee;
+			$scope.isAccepted = Bet.isAccepted;
 			$scope.isCompleted = Bet.isCompleted;
 		}
 
 		$scope.comments = Comment.comments(bet.$id);
 		$scope.block = false;	// block is used to enforce bet conditions
+	};
+
+	$scope.completeBet = function(betId) {
+		Bet.completeBet(betId)
+			.then(function() {
+				toaster.pop('success', 'This bet is has completed successfully.');
+			});
 	};
 
 	$scope.cancelBet = function(betId) {
