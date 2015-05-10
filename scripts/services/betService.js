@@ -81,12 +81,11 @@ app.factory('Bet', function(FURL, $firebase, Auth, $q) {
 			});
 		},
 
-		isCreator: function(bet) {
-			return (user && user.provider && user.uid === bet.bettor);
-		},
-
-		isOpen: function(bet) {
-			return bet.status === 'open';
+		acceptBet: function(bet) {	
+			var t = this.getBet(bet.$id);
+			return t.$update({
+				status: 'accepted'
+			});
 		},
 
 		completeBet: function(betId) {
@@ -94,6 +93,14 @@ app.factory('Bet', function(FURL, $firebase, Auth, $q) {
 			return t.$update({
 				status: 'completed'
 			});
+		},
+
+		isCreator: function(bet) {
+			return (user && user.provider && user.uid === bet.bettor);
+		},
+
+		isOpen: function(bet) {
+			return bet.status === 'open' || bet.status === 'accepted';
 		},
 
 		isAssignee: function(bet) {

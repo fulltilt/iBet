@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Auth, Comment, Stake) {
+app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Auth, Comment) {
 	$scope.searchBet = '';
 	$scope.bets = Bet.all;
 	$scope.signedIn = Auth.signedIn;
@@ -17,12 +17,6 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 		$scope.selectedBet = bet;
 
 		if ($scope.signedIn()) {
-			// Check if the current login used has already made a stake for selected item
-			Stake.isStaked(bet.$id)
-				.then(function(data) {
-					$scope.alreadyStaked = data;
-				});
-
 			$scope.isBetCreator = Bet.isCreator;
 			$scope.isOpen = Bet.isOpen;
 			$scope.isAssignee = Bet.isAssignee;
@@ -30,9 +24,7 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 		}
 
 		$scope.comments = Comment.comments(bet.$id);
-		$scope.stakes = Stake.stakes(bet.$id);
-		$scope.block = false;	// block is used to enforce stake conditions
-		$scope.isStakeMaker = Stake.isMaker;
+		$scope.block = false;	// block is used to enforce bet conditions
 	};
 
 	$scope.cancelBet = function(betId) {
@@ -52,47 +44,6 @@ app.controller('HomeController', function($scope, $stateParams, toaster, Bet, Au
 		Comment.addComment($scope.selectedBet.$id, comment)
 			.then(function() {
 				$scope.content = '';
-			});
-	};
-
-	$scope.makeStake = function() {
-		var stake = {
-			total: $scope.total,
-			uid: $scope.user.uid,
-			name: $scope.user.profile.name,
-			gravatar: $scope.user.profile.gravatar
-		};
-
-		Stake.makeStake($scope.selectedBet.$id, stake)
-			.then(function() {
-				toaster.pop('success', 'Your stake has been placed');
-				$scope.total = '';
-				$scope.block = true;
-				$scope.alreadyStaked = true;
-			});
-	};
-
-	$scope.cancelStake = function(stakeId) {
-		Stake.cancelStake($scope.selectedBet.$id, stakeId)
-			.then(function() {
-				toaster.pop('success', 'Your stake has been cancelled.');
-
-				$scope.alreadyStaked = false;
-				$scope.block = false;
-			});
-	};
-
-	$scope.acceptStake = function(stakeId, runnerId) {
-		Stake.acceptStake($scope.selectedBet.$id, stakeId, runnerId)
-			.then(function() {
-				toaster.pop('success', 'Stake is accepted.');
-			});
-	};
-
-	$scope.completeBet = function(betId) {
-		Bet.completeBet(betId)
-			.then(function() {
-				toaster.pop('success', 'Congratulations! You have compeleted this bet!');
 			});
 	};
 });

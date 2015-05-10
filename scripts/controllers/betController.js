@@ -39,4 +39,11 @@ app.controller('BetController', function($scope, $state, toaster, Bet, Auth, Com
 				toaster.pop('success', 'Bet is updated');
 			});
 	};
+
+	$scope.acceptBet = function(bet) {
+		Bet.acceptBet(bet)
+			.then(function() {
+				toaster.pop('success', 'Bet has been accepted');
+			});
+	};
 });

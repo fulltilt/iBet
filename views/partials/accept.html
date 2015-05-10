@@ -1,4 +1,4 @@
-<div class="modal fade" id="accModal">
+<div class="modal fade" id="accModal" ng-controller="BetController">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="panel panel-info title">
@@ -8,7 +8,7 @@
 				</div>
 
 				<div class="panel-body">
-					<form ng-submit="makeOffer()">
+					<form ng-submit="acceptBet(selectedBet)">
 						<input type="submit" value="Accept Bet?" class="btn btn-info" ng-disabled="$parent.block">
 					</form>
 				</div>
