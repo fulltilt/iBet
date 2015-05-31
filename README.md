@@ -9,11 +9,14 @@ A party (bettor) initiates a bet directed at a second party (bettee) which conta
 Once the bet is accepted, to complete the bet, the bettor must initiate the completion process by clicking Complete which will put the bet into Pending status. At this point, the bet can be completed once the bettee clicks the Complete button while the bet is in Pending status.
 
 
+##To Run
+Inside main directory (where index.html is located), startup a server (i.e. on command line: python -m SimpleHTTPServer 8080). From here, open a browser window and go to http://localhost:8080
+
 ###Technologies Used
 This app was written using the Angular framework with Firebase used as persistent storage.
 
 
 ###Dev Notes:
- -may be able to consolidate denormalized bettor_bets and bettee_bets
- -on a related note, when changing the status of a bet, denormalized tables above currently don't get updated
+-may be able to consolidate denormalized bettor_bets and bettee_bets
+-on a related note, when changing the status of a bet, denormalized tables above currently don't get updated
 
